@@ -95,11 +95,7 @@ if __name__ == '__main__':
 
 
 
-    # write packets into a json file
-    packets_json = {
-        "packets": [],
-        "size": 0
-    }
+    packets = []
     for protocol in PROTOCOLS:
         types_class_path = f"{PACKETS_PATH}/{protocol}/{protocol.capitalize()}PacketTypes"
         cf = loader[types_class_path]
@@ -136,10 +132,13 @@ if __name__ == '__main__':
 
 
 
-            packets_json["packets"].append(packet)
+            packets.append(packet)
 
 
-
+    packets_json = {
+        "size": len(packets),
+        "packets": packets,
+    }
 
 
     json.dump(packets_json, open("packets.json", "w"), indent=4)

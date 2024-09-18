@@ -2,3 +2,5 @@ output/
 downloads/
 venv/
 mcdecomp.jar
+.idea/
+__pycache__/
