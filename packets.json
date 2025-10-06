@@ -1,12 +1,28 @@
 {
-    "size": 200,
+    "size": 220,
     "packets": [
+        {
+            "id": -1,
+            "name": "CLEAR_DIALOG",
+            "side": "CLIENTBOUND",
+            "state": "common",
+            "class": "net/minecraft/network/protocol/common/ClientboundClearDialogPacket",
+            "structure": null
+        },
         {
             "id": -1,
             "name": "CUSTOM_PAYLOAD",
             "side": "CLIENTBOUND",
             "state": "common",
             "class": "net/minecraft/network/protocol/common/ClientboundCustomPayloadPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "CUSTOM_REPORT_DETAILS",
+            "side": "CLIENTBOUND",
+            "state": "common",
+            "class": "net/minecraft/network/protocol/common/ClientboundCustomReportDetailsPacket",
             "structure": null
         },
         {
@@ -53,6 +69,22 @@
             "side": "CLIENTBOUND",
             "state": "common",
             "class": "net/minecraft/network/protocol/common/ClientboundResourcePackPushPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "SERVER_LINKS",
+            "side": "CLIENTBOUND",
+            "state": "common",
+            "class": "net/minecraft/network/protocol/common/ClientboundServerLinksPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "SHOW_DIALOG",
+            "side": "CLIENTBOUND",
+            "state": "common",
+            "class": "net/minecraft/network/protocol/common/ClientboundShowDialogPacket",
             "structure": null
         },
         {
@@ -135,6 +167,14 @@
                 "id": "UUID",
                 "action": "Enum"
             }
+        },
+        {
+            "id": -1,
+            "name": "CUSTOM_CLICK_ACTION",
+            "side": "SERVERBOUND",
+            "state": "common",
+            "class": "net/minecraft/network/protocol/common/ServerboundCustomClickActionPacket",
+            "structure": null
         },
         {
             "id": -1,
@@ -250,20 +290,6 @@
                 "xa": "Short",
                 "ya": "Short",
                 "za": "Short"
-            }
-        },
-        {
-            "id": -1,
-            "name": "ADD_EXPERIENCE_ORB",
-            "side": "CLIENTBOUND",
-            "state": "game",
-            "class": "net/minecraft/network/protocol/game/ClientboundAddExperienceOrbPacket",
-            "structure": {
-                "id": "VarInt",
-                "x": "Double",
-                "y": "Double",
-                "z": "Double",
-                "value": "Short"
             }
         },
         {
@@ -419,7 +445,7 @@
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundContainerClosePacket",
             "structure": {
-                "containerId": "Byte"
+                "containerId": "ContainerId"
             }
         },
         {
@@ -428,12 +454,7 @@
             "side": "CLIENTBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundContainerSetContentPacket",
-            "structure": {
-                "containerId": "Byte",
-                "stateId": "VarInt",
-                "items": "net/minecraft/world/item/ItemStack.OPTIONAL_LIST_STREAM_CODEC",
-                "carriedItem": "net/minecraft/world/item/ItemStack.OPTIONAL_STREAM_CODEC"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -442,7 +463,7 @@
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundContainerSetDataPacket",
             "structure": {
-                "containerId": "Byte",
+                "containerId": "ContainerId",
                 "id": "Short",
                 "value": "Short"
             }
@@ -454,7 +475,7 @@
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundContainerSetSlotPacket",
             "structure": {
-                "containerId": "Byte",
+                "containerId": "ContainerId",
                 "stateId": "VarInt",
                 "slot": "Short",
                 "itemStack": "net/minecraft/world/item/ItemStack.OPTIONAL_STREAM_CODEC"
@@ -487,7 +508,7 @@
             "class": "net/minecraft/network/protocol/game/ClientboundDamageEventPacket",
             "structure": {
                 "entityId": "VarInt",
-                "sourceType": "net/minecraft/network/protocol/game/ClientboundDamageEventPacket.DAMAGE_TYPE_ID_STREAM_CODEC"
+                "sourceType": "net/minecraft/world/damagesource/DamageType.STREAM_CODEC"
             }
         },
         {
@@ -530,23 +551,19 @@
         },
         {
             "id": -1,
+            "name": "ENTITY_POSITION_SYNC",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundEntityPositionSyncPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
             "name": "EXPLODE",
             "side": "CLIENTBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundExplodePacket",
-            "structure": {
-                "x": "Collection",
-                "y": "Double",
-                "z": "Double",
-                "power": "Float",
-                "knockbackX": "Float",
-                "knockbackY": "Float",
-                "knockbackZ": "Float",
-                "blockInteraction": "Enum",
-                "smallExplosionParticles": "net/minecraft/core/particles/ParticleTypes.STREAM_CODEC",
-                "largeExplosionParticles": "net/minecraft/core/particles/ParticleTypes.STREAM_CODEC",
-                "explosionSound": "net/minecraft/sounds/SoundEvent.STREAM_CODEC"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -576,8 +593,8 @@
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundHorseScreenOpenPacket",
             "structure": {
-                "containerId": "Byte",
-                "size": "VarInt",
+                "containerId": "ContainerId",
+                "inventoryColumns": "VarInt",
                 "entityId": "Int"
             }
         },
@@ -643,6 +660,7 @@
             "class": "net/minecraft/network/protocol/game/ClientboundLevelParticlesPacket",
             "structure": {
                 "overrideLimiter": "Boolean",
+                "alwaysShow": "Boolean",
                 "x": "Double",
                 "y": "Double",
                 "z": "Double",
@@ -701,7 +719,7 @@
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundMerchantOffersPacket",
             "structure": {
-                "containerId": "VarInt",
+                "containerId": "ContainerId",
                 "offers": "net/minecraft/world/item/trading/MerchantOffers.STREAM_CODEC",
                 "villagerXp": "VarInt",
                 "showProgress": "Boolean",
@@ -740,6 +758,14 @@
         },
         {
             "id": -1,
+            "name": "MOVE_MINECART_ALONG_TRACK",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundMoveMinecartPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
             "name": "MOVE_ENTITY_ROT",
             "side": "CLIENTBOUND",
             "state": "game",
@@ -757,13 +783,7 @@
             "side": "CLIENTBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundMoveVehiclePacket",
-            "structure": {
-                "x": "Double",
-                "y": "Double",
-                "z": "Double",
-                "yRot": "Float",
-                "xRot": "Float"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -800,10 +820,7 @@
             "side": "CLIENTBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundPlaceGhostRecipePacket",
-            "structure": {
-                "containerId": "Byte",
-                "recipe": "ResourceLocation"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -824,6 +841,7 @@
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundPlayerChatPacket",
             "structure": {
+                "globalIndex": "VarInt",
                 "sender": "UUID",
                 "index": "VarInt",
                 "signature": "Nullable",
@@ -900,28 +918,39 @@
             "side": "CLIENTBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundPlayerPositionPacket",
-            "structure": {
-                "x": "Double",
-                "y": "Double",
-                "z": "Double",
-                "yRot": "Float",
-                "xRot": "Float",
-                "relativeArguments": "Byte",
-                "id": "VarInt"
-            }
+            "structure": null
         },
         {
             "id": -1,
-            "name": "RECIPE",
+            "name": "PLAYER_ROTATION",
             "side": "CLIENTBOUND",
             "state": "game",
-            "class": "net/minecraft/network/protocol/game/ClientboundRecipePacket",
-            "structure": {
-                "state": "Collection",
-                "bookSettings": "",
-                "recipes": "Collection",
-                "toHighlight": "net/minecraft/network/protocol/game/ClientboundRecipePacket$State.INIT"
-            }
+            "class": "net/minecraft/network/protocol/game/ClientboundPlayerRotationPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "RECIPE_BOOK_ADD",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundRecipeBookAddPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "RECIPE_BOOK_REMOVE",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundRecipeBookRemovePacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "RECIPE_BOOK_SETTINGS",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundRecipeBookSettingsPacket",
+            "structure": null
         },
         {
             "id": -1,
@@ -1062,16 +1091,6 @@
         },
         {
             "id": -1,
-            "name": "SET_CARRIED_ITEM",
-            "side": "CLIENTBOUND",
-            "state": "game",
-            "class": "net/minecraft/network/protocol/game/ClientboundSetCarriedItemPacket",
-            "structure": {
-                "slot": "Byte"
-            }
-        },
-        {
-            "id": -1,
             "name": "SET_CHUNK_CACHE_CENTER",
             "side": "CLIENTBOUND",
             "state": "game",
@@ -1181,6 +1200,14 @@
         },
         {
             "id": -1,
+            "name": "SET_HELD_SLOT",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundSetHeldSlotPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
             "name": "SET_OBJECTIVE",
             "side": "CLIENTBOUND",
             "state": "game",
@@ -1243,10 +1270,7 @@
             "side": "CLIENTBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundSetTimePacket",
-            "structure": {
-                "gameTime": "Long",
-                "dayTime": "Long"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -1362,15 +1386,15 @@
             "side": "CLIENTBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ClientboundTeleportEntityPacket",
-            "structure": {
-                "id": "VarInt",
-                "x": "Double",
-                "y": "Double",
-                "z": "Double",
-                "yRot": "Byte",
-                "xRot": "Byte",
-                "onGround": "Boolean"
-            }
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "TEST_INSTANCE_BLOCK_STATUS",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundTestInstanceBlockStatus",
+            "structure": null
         },
         {
             "id": -1,
@@ -1381,7 +1405,8 @@
             "structure": {
                 "reset": "Boolean",
                 "added": "net/minecraft/advancements/AdvancementHolder.LIST_STREAM_CODEC",
-                "progress": "Map"
+                "progress": "Map",
+                "showAdvancements": "Boolean"
             }
         },
         {
@@ -1400,7 +1425,7 @@
             "class": "net/minecraft/network/protocol/game/ClientboundUpdateMobEffectPacket",
             "structure": {
                 "entityId": "VarInt",
-                "effect": "net/minecraft/core/registries/Registries.MOB_EFFECT",
+                "effect": "net/minecraft/world/effect/MobEffect.STREAM_CODEC",
                 "effectDurationTicks": "VarInt",
                 "flags": "Byte"
             }
@@ -1421,10 +1446,16 @@
             "class": "net/minecraft/network/protocol/game/ClientboundProjectilePowerPacket",
             "structure": {
                 "id": "VarInt",
-                "xPower": "Double",
-                "yPower": "Double",
-                "zPower": "Double"
+                "accelerationPower": "Double"
             }
+        },
+        {
+            "id": -1,
+            "name": "WAYPOINT",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundTrackedWaypointPacket",
+            "structure": null
         },
         {
             "id": -1,
@@ -1449,10 +1480,29 @@
         },
         {
             "id": -1,
+            "name": "BUNDLE_ITEM_SELECTED",
+            "side": "SERVERBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ServerboundSelectBundleItemPacket",
+            "structure": {
+                "slotId": "VarInt",
+                "selectedItemIndex": "VarInt"
+            }
+        },
+        {
+            "id": -1,
             "name": "CHANGE_DIFFICULTY",
             "side": "SERVERBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ServerboundChangeDifficultyPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "CHANGE_GAME_MODE",
+            "side": "SERVERBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ServerboundChangeGameModePacket",
             "structure": null
         },
         {
@@ -1533,6 +1583,14 @@
         },
         {
             "id": -1,
+            "name": "CLIENT_TICK_END",
+            "side": "SERVERBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ServerboundClientTickEndPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
             "name": "COMMAND_SUGGESTION",
             "side": "SERVERBOUND",
             "state": "game",
@@ -1564,15 +1622,7 @@
             "side": "SERVERBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ServerboundContainerClickPacket",
-            "structure": {
-                "containerId": "Byte",
-                "stateId": "VarInt",
-                "slotNum": "Short",
-                "buttonNum": "Byte",
-                "clickType": "Enum",
-                "changedSlots": "net/minecraft/network/protocol/game/ServerboundContainerClickPacket.SLOTS_STREAM_CODEC",
-                "carriedItem": "net/minecraft/world/item/ItemStack.OPTIONAL_STREAM_CODEC"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -1581,7 +1631,7 @@
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ServerboundContainerClosePacket",
             "structure": {
-                "containerId": "Byte"
+                "containerId": "ContainerId"
             }
         },
         {
@@ -1592,7 +1642,7 @@
             "class": "net/minecraft/network/protocol/game/ServerboundContainerSlotStateChangedPacket",
             "structure": {
                 "slotId": "VarInt",
-                "containerId": "VarInt",
+                "containerId": "ContainerId",
                 "newState": "Boolean"
             }
         },
@@ -1714,13 +1764,7 @@
             "side": "SERVERBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ServerboundMoveVehiclePacket",
-            "structure": {
-                "x": "Double",
-                "y": "Double",
-                "z": "Double",
-                "yRot": "Float",
-                "xRot": "Float"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -1735,13 +1779,19 @@
         },
         {
             "id": -1,
-            "name": "PICK_ITEM",
+            "name": "PICK_ITEM_FROM_BLOCK",
             "side": "SERVERBOUND",
             "state": "game",
-            "class": "net/minecraft/network/protocol/game/ServerboundPickItemPacket",
-            "structure": {
-                "slot": "VarInt"
-            }
+            "class": "net/minecraft/network/protocol/game/ServerboundPickItemFromBlockPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "PICK_ITEM_FROM_ENTITY",
+            "side": "SERVERBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ServerboundPickItemFromEntityPacket",
+            "structure": null
         },
         {
             "id": -1,
@@ -1749,11 +1799,7 @@
             "side": "SERVERBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ServerboundPlaceRecipePacket",
-            "structure": {
-                "containerId": "Byte",
-                "recipe": "ResourceLocation",
-                "shiftDown": "Boolean"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -1791,11 +1837,15 @@
             "side": "SERVERBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ServerboundPlayerInputPacket",
-            "structure": {
-                "xxa": "Float",
-                "zza": "Float",
-                "isJumping": "Byte"
-            }
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "PLAYER_LOADED",
+            "side": "SERVERBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ServerboundPlayerLoadedPacket",
+            "structure": null
         },
         {
             "id": -1,
@@ -1815,9 +1865,7 @@
             "side": "SERVERBOUND",
             "state": "game",
             "class": "net/minecraft/network/protocol/game/ServerboundRecipeBookSeenRecipePacket",
-            "structure": {
-                "recipe": "ResourceLocation"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -1919,6 +1967,22 @@
         },
         {
             "id": -1,
+            "name": "SET_TEST_BLOCK",
+            "side": "SERVERBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ServerboundSetTestBlockPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "TEST_INSTANCE_BLOCK_ACTION",
+            "side": "SERVERBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ServerboundTestInstanceBlockActionPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
             "name": "SIGN_UPDATE",
             "side": "SERVERBOUND",
             "state": "game",
@@ -1969,7 +2033,9 @@
             "class": "net/minecraft/network/protocol/game/ServerboundUseItemPacket",
             "structure": {
                 "hand": "Enum",
-                "sequence": "VarInt"
+                "sequence": "VarInt",
+                "yRot": "Float",
+                "xRot": "Float"
             }
         },
         {
@@ -2006,6 +2072,22 @@
         },
         {
             "id": -1,
+            "name": "SET_CURSOR_ITEM",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundSetCursorItemPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
+            "name": "SET_PLAYER_INVENTORY",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class": "net/minecraft/network/protocol/game/ClientboundSetPlayerInventoryPacket",
+            "structure": null
+        },
+        {
+            "id": -1,
             "name": "INTENTION",
             "side": "CLIENT",
             "state": "handshake",
@@ -2025,10 +2107,10 @@
         },
         {
             "id": -1,
-            "name": "GAME_PROFILE",
+            "name": "LOGIN_FINISHED",
             "side": "CLIENTBOUND",
             "state": "login",
-            "class": "net/minecraft/network/protocol/login/ClientboundGameProfilePacket",
+            "class": "net/minecraft/network/protocol/login/ClientboundLoginFinishedPacket",
             "structure": null
         },
         {
@@ -2060,9 +2142,7 @@
             "side": "CLIENTBOUND",
             "state": "login",
             "class": "net/minecraft/network/protocol/login/ClientboundLoginDisconnectPacket",
-            "structure": {
-                "reason": "Utf"
-            }
+            "structure": null
         },
         {
             "id": -1,
@@ -2131,9 +2211,7 @@
             "side": "CLIENTBOUND",
             "state": "status",
             "class": "net/minecraft/network/protocol/status/ClientboundStatusResponsePacket",
-            "structure": {
-                "status": "JsonWithCodec"
-            }
+            "structure": null
         },
         {
             "id": -1,

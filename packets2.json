@@ -1,0 +1,13 @@
+{
+    "size": 1,
+    "packets": [
+        {
+            "id": 2,
+            "name": "ADD_ENTITY",
+            "side": "CLIENTBOUND",
+            "state": "game",
+            "class_path": "net/minecraft/network/protocol/game/ClientboundAddEntityPacket",
+            "structure": null
+        }
+    ]
+}

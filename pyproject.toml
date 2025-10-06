@@ -1,0 +1,21 @@
+[project]
+name = "journal"
+version = "0.0.1"
+description = "Getting a reliable minecraft packet description"
+authors = [
+    {name = "Bafbi",email = "bafbi3@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "lawu @ git+https://github.com/TkTech/lawu.git@develop"
+]
+
+[tool.poetry]
+package-mode = false
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
